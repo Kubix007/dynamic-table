@@ -1,5 +1,48 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import BookIcon from "../BookIcon";
+import * as Styles from "./DynamicTable.styles";
+
 const DynamicTable = () => {
-  return <div></div>;
+  const { books } = useSelector((state: RootState) => state.book);
+
+  const render = () => {
+    return books.map((book) => {
+      return (
+        <Styles.TableRow key={book.url} onClick={() => console.log(book)}>
+          <Styles.TableColumn1 className="col-1">
+            <BookIcon src={book.simple_thumb} alt={book.title} />
+          </Styles.TableColumn1>
+          <Styles.TableColumn2 className="col-2" data-label="Tytuł">
+            {book.title}
+          </Styles.TableColumn2>
+          <Styles.TableColumn3 className="col-3" data-label="Autor">
+            {book.author}
+          </Styles.TableColumn3>
+          <Styles.TableColumn4 className="col-4" data-label="Gatunek">
+            {book.genre}
+          </Styles.TableColumn4>
+          <Styles.TableColumn5 className="col-5" data-label="Rodzaj">
+            {book.kind}
+          </Styles.TableColumn5>
+        </Styles.TableRow>
+      );
+    });
+  };
+
+  return (
+    <Styles.ResponsiveTable>
+      <Styles.TableHeader className="table-header">
+        <Styles.TableColumn1 className="col-1"></Styles.TableColumn1>
+        <Styles.TableColumn2 className="col-2">Tytuł</Styles.TableColumn2>
+        <Styles.TableColumn3 className="col-3">Autor</Styles.TableColumn3>
+        <Styles.TableColumn4 className="col-4">Gatunek</Styles.TableColumn4>
+        <Styles.TableColumn5 className="col-5">Rodzaj</Styles.TableColumn5>
+      </Styles.TableHeader>
+
+      {render()}
+    </Styles.ResponsiveTable>
+  );
 };
 
 export default DynamicTable;
