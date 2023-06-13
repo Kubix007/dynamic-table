@@ -72,8 +72,12 @@ export const TableHeader = styled.li`
 
 export const TableRow = styled.li`
   background-color: #fff;
+  padding: 5px;
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
   font-family: FiraSans-Light;
+  &:hover {
+    background-color: #eee;
+  }
 `;
 
 export const TableColumn1 = styled.div`

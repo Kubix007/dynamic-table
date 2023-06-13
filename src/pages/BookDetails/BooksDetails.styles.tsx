@@ -1,4 +1,4 @@
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import styled from "styled-components";
 
 export const Container = styled(Box)`
@@ -7,10 +7,4 @@ export const Container = styled(Box)`
   margin: 0 auto;
   padding: 10px;
   text-align: -webkit-center;
-`;
-
-export const PaperLayout = styled(Paper)`
-  &.MuiPaper-root {
-    padding: 20px;
-  }
 `;

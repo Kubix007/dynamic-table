@@ -2,14 +2,23 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import BookIcon from "../BookIcon";
 import * as Styles from "./DynamicTable.styles";
+import * as SharedStyles from "./../../shared/types";
+import { useNavigate } from "react-router-dom";
 
 const DynamicTable = () => {
   const { books } = useSelector((state: RootState) => state.book);
+  let navigate = useNavigate();
+
+  const handleClick = (book: SharedStyles.IBook) => {
+    navigate(
+      `/ksiazki/${book.genre}/${book.kind}/${book.author}/${book.title}`
+    );
+  };
 
   const render = () => {
     return books.map((book) => {
       return (
-        <Styles.TableRow key={book.url} onClick={() => console.log(book)}>
+        <Styles.TableRow key={book.url} onClick={() => handleClick(book)}>
           <Styles.TableColumn1 className="col-1">
             <BookIcon src={book.simple_thumb} alt={book.title} />
           </Styles.TableColumn1>
