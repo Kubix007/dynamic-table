@@ -1,24 +1,13 @@
 import axios from "axios";
 
-const API_KEY = "AIzaSyB7cAN8zsi4XztqhCWW7QfMRIphiuiexgA";
-
-const getBooks = async (data: any) => {
-  const config = {
-    params: {
-      key: API_KEY,
-    },
-  };
-
-  const response = await axios.get(
-    `https://www.googleapis.com/books/v1/volumes?q=/`,
-    config
-  );
+const getAllBooks = async () => {
+  const response = await axios.get(`https://wolnelektury.pl/api/books/`);
 
   return response.data;
 };
 
 const bookService = {
-  getBooks,
+  getAllBooks,
 };
 
 export default bookService;

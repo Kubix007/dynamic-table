@@ -4,23 +4,19 @@ import bookService from "./bookService";
 import axios from "axios";
 
 const initialState: SharedTypes.IBookState = {
-  books: {
-    kind: "",
-    totalItems: 0,
-    items: [],
-  },
+  books: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
   message: "",
 };
 
-//Get currency
-export const getBooks = createAsyncThunk(
-  "/book/getBooks",
-  async (data: any, thunkAPI) => {
+//Get all books
+export const getAllBooks = createAsyncThunk(
+  "/book/getAllBooks",
+  async (_, thunkAPI) => {
     try {
-      return await bookService.getBooks(data);
+      return await bookService.getAllBooks();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message =
@@ -46,16 +42,16 @@ export const bookSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getBooks.pending, (state) => {
+      .addCase(getAllBooks.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getBooks.fulfilled, (state, action) => {
+      .addCase(getAllBooks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.books = action.payload;
       })
-      .addCase(getBooks.rejected, (state, action) => {
+      .addCase(getAllBooks.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
