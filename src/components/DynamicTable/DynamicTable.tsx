@@ -15,7 +15,7 @@ const DynamicTable = () => {
     );
   };
 
-  const render = () => {
+  const TableBody = () => {
     return books.map((book) => {
       return (
         <Styles.TableRow key={book.url} onClick={() => handleClick(book)}>
@@ -48,8 +48,7 @@ const DynamicTable = () => {
         <Styles.TableColumn4 className="col-4">Gatunek</Styles.TableColumn4>
         <Styles.TableColumn5 className="col-5">Rodzaj</Styles.TableColumn5>
       </Styles.TableHeader>
-
-      {render()}
+      {TableBody()}
     </Styles.ResponsiveTable>
   );
 };

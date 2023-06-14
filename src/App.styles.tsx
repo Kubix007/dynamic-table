@@ -7,6 +7,7 @@ export const Container = styled(Box)`
   margin: 0 auto;
   padding: 10px;
   text-align: -webkit-center;
+  height: 100vh;
 `;
 
 export const PaperLayout = styled(Paper)`
