@@ -15,7 +15,7 @@ export const Container = styled(Box)`
 export const PaperLayout = styled(Paper)`
   &.MuiPaper-root {
     padding: 20px;
-    max-width: 960px;
+    max-width: 1100px;
     height: fit-content;
   }
 `;

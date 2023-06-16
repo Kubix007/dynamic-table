@@ -10,15 +10,15 @@ const BookCardList = () => {
   const { authorsBook } = useSelector((state: RootState) => state.selectedBook);
   const { title } = useParams();
 
-  const [currentPage, setCurrentPage] = useState(2);
-  const [booksPerPage, setBooksPerPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [booksPerPage] = useState(3);
   const lastBookIndex = currentPage * booksPerPage;
   const firstBookIndex = lastBookIndex - booksPerPage;
   const currentBooks = authorsBook.slice(firstBookIndex, lastBookIndex);
 
   return (
-    <div>
-      <Styles.GridContainer container direction="column">
+    <Styles.Container>
+      <Styles.GridContainer container direction="row">
         {currentBooks
           .filter((item) => item.title !== title)
           .map((item) => (
@@ -31,12 +31,12 @@ const BookCardList = () => {
           ))}
       </Styles.GridContainer>
       <Pagination
-        totalBooks={authorsBook.length}
+        totalBooks={authorsBook.length - 1}
         booksPerPage={booksPerPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
       />
-    </div>
+    </Styles.Container>
   );
 };
 

@@ -1,13 +1,20 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import BookIcon from "../BookIcon";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Pagination from "../Pagination";
 import * as Styles from "./DynamicTable.styles";
 import * as SharedStyles from "./../../shared/types";
-import { useNavigate } from "react-router-dom";
 
 const DynamicTable = () => {
-  let { books } = useSelector((state: RootState) => state.book);
+  const { books } = useSelector((state: RootState) => state.book);
   let navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [booksPerPage] = useState(3);
+  const lastBookIndex = currentPage * booksPerPage;
+  const firstBookIndex = lastBookIndex - booksPerPage;
+  const currentBooks = books.slice(firstBookIndex, lastBookIndex);
 
   const handleClick = (book: SharedStyles.IBook) => {
     navigate(
@@ -16,7 +23,7 @@ const DynamicTable = () => {
   };
 
   const TableBody = () => {
-    return books.map((book) => {
+    return currentBooks.map((book) => {
       return (
         <Styles.TableRow key={book.url} onClick={() => handleClick(book)}>
           <Styles.TableColumn1 className="col-1">
@@ -40,16 +47,24 @@ const DynamicTable = () => {
   };
 
   return (
-    <Styles.ResponsiveTable>
-      <Styles.TableHeader className="table-header">
-        <Styles.TableColumn1 className="col-1"></Styles.TableColumn1>
-        <Styles.TableColumn2 className="col-2">Tytuł</Styles.TableColumn2>
-        <Styles.TableColumn3 className="col-3">Autor</Styles.TableColumn3>
-        <Styles.TableColumn4 className="col-4">Gatunek</Styles.TableColumn4>
-        <Styles.TableColumn5 className="col-5">Rodzaj</Styles.TableColumn5>
-      </Styles.TableHeader>
-      {TableBody()}
-    </Styles.ResponsiveTable>
+    <div>
+      <Styles.ResponsiveTable>
+        <Styles.TableHeader className="table-header">
+          <Styles.TableColumn1 className="col-1"></Styles.TableColumn1>
+          <Styles.TableColumn2 className="col-2">Tytuł</Styles.TableColumn2>
+          <Styles.TableColumn3 className="col-3">Autor</Styles.TableColumn3>
+          <Styles.TableColumn4 className="col-4">Gatunek</Styles.TableColumn4>
+          <Styles.TableColumn5 className="col-5">Rodzaj</Styles.TableColumn5>
+        </Styles.TableHeader>
+        {TableBody()}
+      </Styles.ResponsiveTable>
+      <Pagination
+        booksPerPage={booksPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalBooks={books.length}
+      />
+    </div>
   );
 };
 
