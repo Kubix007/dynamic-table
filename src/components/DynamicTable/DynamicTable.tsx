@@ -6,7 +6,7 @@ import * as SharedStyles from "./../../shared/types";
 import { useNavigate } from "react-router-dom";
 
 const DynamicTable = () => {
-  const { books } = useSelector((state: RootState) => state.book);
+  let { books } = useSelector((state: RootState) => state.book);
   let navigate = useNavigate();
 
   const handleClick = (book: SharedStyles.IBook) => {
