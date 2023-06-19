@@ -1,25 +1,41 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
 import BookIcon from "../BookIcon";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Pagination from "../Pagination";
+import { setGenre } from "../../features/filters/filterSlice";
+import { AppDispatch } from "../../app/store";
+import { useDispatch } from "react-redux";
+import { remove } from "diacritics";
 import * as Styles from "./DynamicTable.styles";
-import * as SharedStyles from "./../../shared/types";
+import * as SharedTypes from "./../../shared/types";
+import * as Types from "./DynamicTable.types";
 
-const DynamicTable = () => {
-  const { books } = useSelector((state: RootState) => state.book);
+const DynamicTable = ({ data }: Types.IProps) => {
   let navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage] = useState(3);
   const lastBookIndex = currentPage * booksPerPage;
   const firstBookIndex = lastBookIndex - booksPerPage;
-  const currentBooks = books.slice(firstBookIndex, lastBookIndex);
+  const currentBooks = data.slice(firstBookIndex, lastBookIndex);
+  const dispatch: AppDispatch = useDispatch();
 
-  const handleClick = (book: SharedStyles.IBook) => {
+  const handleClick = (book: SharedTypes.IBook) => {
     navigate(
-      `/ksiazki/${book.genre}/${book.kind}/${book.author}/${book.title}`
+      `/ksiazki/${remove(
+        book.genre.split(", ")[0].replaceAll(" ", "-").toLowerCase()
+      )}/${remove(book.kind.replaceAll(" ", "-").toLowerCase())}/${remove(
+        book.author.replaceAll(" ", "-").toLowerCase()
+      )}/${remove(
+        book.title
+          .replaceAll(" ", "-")
+          .toLocaleLowerCase()
+          .replaceAll("(", "")
+          .replaceAll(")", "")
+          .replaceAll("!", "")
+          .replaceAll(".", "")
+      )}`
     );
+    dispatch(setGenre(book.genre.split(", ")[0].replaceAll(" ", "-")));
   };
 
   const TableBody = () => {
@@ -36,7 +52,7 @@ const DynamicTable = () => {
             {book.author}
           </Styles.TableColumn3>
           <Styles.TableColumn4 className="col-4" data-label="Gatunek">
-            {book.genre}
+            {book.genre.split(", ")[0]}
           </Styles.TableColumn4>
           <Styles.TableColumn5 className="col-5" data-label="Rodzaj">
             {book.kind}
@@ -62,7 +78,7 @@ const DynamicTable = () => {
         booksPerPage={booksPerPage}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        totalBooks={books.length}
+        totalBooks={data.length}
       />
     </div>
   );

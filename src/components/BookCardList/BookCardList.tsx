@@ -11,7 +11,7 @@ const BookCardList = () => {
   const { title } = useParams();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [booksPerPage] = useState(3);
+  const [booksPerPage] = useState(4);
   const lastBookIndex = currentPage * booksPerPage;
   const firstBookIndex = lastBookIndex - booksPerPage;
   const currentBooks = authorsBook.slice(firstBookIndex, lastBookIndex);

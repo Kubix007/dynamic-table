@@ -10,7 +10,7 @@ export const NoImageError = styled(NoImage)`
 export const BooksDetailsContainer = styled(Grid)`
   &.MuiGrid-root {
     width: 100%;
-    max-width: 960px;
+    width: 1020px;
     height: 100%;
   }
 `;

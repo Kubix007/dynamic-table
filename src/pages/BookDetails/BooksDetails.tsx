@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../app/store";
 import { Button } from "@mui/material";
@@ -14,10 +14,17 @@ import { CircularProgress } from "@mui/material";
 import * as Styles from "./BooksDetails.styles";
 
 const BooksDetails = () => {
-  const { genre, kind, author, title } = useParams();
-  const { books } = useSelector((state: RootState) => state.book);
-  const selectedBook = books.filter((item) => item.title === title)[0];
-  const formatedTitle = remove(title!.replaceAll(" ", "-").toLocaleLowerCase());
+  const { author, title, genre, kind } = useParams();
+  const { isLoading: isLoadingBooks, isError: isErrorLoadingBooks } =
+    useSelector((state: RootState) => state.book);
+  const formatedTitle = remove(
+    title!
+      .toLocaleLowerCase()
+      .replaceAll("(", "")
+      .replaceAll(")", "")
+      .replaceAll("!", "")
+      .replaceAll(".", "")
+  );
   const dispatch: AppDispatch = useDispatch();
   const formatedAuthor = remove(
     author!
@@ -26,7 +33,7 @@ const BooksDetails = () => {
       .replaceAll(")", "")
       .toLocaleLowerCase()
   );
-  const { bookDetails, isLoading } = useSelector(
+  const { bookDetails, isLoading, isError } = useSelector(
     (state: RootState) => state.selectedBook
   );
 
@@ -39,46 +46,58 @@ const BooksDetails = () => {
     };
   }, [author, dispatch, formatedAuthor, formatedTitle]);
 
-  return (
-    <Styles.BooksDetailsContainer container direction="row">
-      <Styles.BookImage item>
-        {selectedBook ? (
-          <img src={selectedBook.simple_thumb} alt={selectedBook.title} />
-        ) : (
-          <Styles.NoImageError />
-        )}
-        <Styles.BookInfoBottom>
-          <Styles.BookGenre>Gatunek: {genre}</Styles.BookGenre>
-          <Styles.BookKind>Rodzaj: {kind}</Styles.BookKind>
-        </Styles.BookInfoBottom>
-      </Styles.BookImage>
-      <Styles.BookDetails item>
-        <Styles.BookDetails container direction="column">
-          <Styles.BookInfoTop item>
-            <Styles.BookTitle>{title}</Styles.BookTitle>
-            <Styles.BookAuthor>{author}</Styles.BookAuthor>
-          </Styles.BookInfoTop>
-          <Styles.BookButtonContainer item>
-            {bookDetails && bookDetails.pdf ? (
-              <Link to={bookDetails.pdf} target="_blank">
-                <Button variant="contained">Pobierz książkę</Button>
-              </Link>
-            ) : (
-              <Button variant="contained" disabled>
-                Książka niedostępna
-              </Button>
-            )}
-          </Styles.BookButtonContainer>
-          <Styles.OtherBooks item>
-            <Styles.OtherBooksInfo>
-              Pozostałe książki autora:
+  if (isLoadingBooks || isLoading) {
+    return <CircularProgress />;
+  } else if (isError || isErrorLoadingBooks) {
+    return <Navigate to="/blad" />;
+  } else {
+    return (
+      <Styles.BooksDetailsContainer container direction="row">
+        <Styles.BookImage item>
+          {bookDetails ? (
+            <img src={bookDetails.simple_thumb} alt={bookDetails.title} />
+          ) : (
+            <Styles.NoImageError />
+          )}
+          <Styles.BookInfoBottom>
+            <Styles.BookGenre>Gatunek: {genre}</Styles.BookGenre>
+            <Styles.BookKind>Rodzaj: {kind}</Styles.BookKind>
+          </Styles.BookInfoBottom>
+        </Styles.BookImage>
+        <Styles.BookDetails item>
+          <Styles.BookDetails container direction="column">
+            <Styles.BookInfoTop item>
+              {bookDetails ? (
+                <Styles.BookTitle>{bookDetails.title}</Styles.BookTitle>
+              ) : null}
+              {bookDetails ? (
+                <Styles.BookAuthor>
+                  {bookDetails.authors[0].name}
+                </Styles.BookAuthor>
+              ) : null}
+            </Styles.BookInfoTop>
+            <Styles.BookButtonContainer item>
+              {bookDetails && bookDetails.pdf ? (
+                <Link to={bookDetails.pdf} target="_blank">
+                  <Button variant="contained">Pobierz książkę</Button>
+                </Link>
+              ) : (
+                <Button variant="contained" disabled>
+                  Książka niedostępna
+                </Button>
+              )}
+            </Styles.BookButtonContainer>
+            <Styles.OtherBooks item>
+              <Styles.OtherBooksInfo>
+                Pozostałe książki autora:
+              </Styles.OtherBooksInfo>
               {isLoading ? <CircularProgress /> : <BookCardList />}
-            </Styles.OtherBooksInfo>
-          </Styles.OtherBooks>
+            </Styles.OtherBooks>
+          </Styles.BookDetails>
         </Styles.BookDetails>
-      </Styles.BookDetails>
-    </Styles.BooksDetailsContainer>
-  );
+      </Styles.BooksDetailsContainer>
+    );
+  }
 };
 
 export default BooksDetails;

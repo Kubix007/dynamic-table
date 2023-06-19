@@ -6,6 +6,15 @@ export interface IBookState {
   message: string;
 }
 
+export interface IFilterState {
+  filters: {
+    genre: string;
+    kind: string;
+    author: string;
+    title: string;
+  };
+}
+
 export interface ISelectedBookState {
   authorsBook: IBook[];
   bookDetails: IBookDetails | null;

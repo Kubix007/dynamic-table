@@ -87,7 +87,7 @@ export const TableColumn1 = styled.div`
 export const TableColumn2 = styled.div`
   flex-basis: 15%;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 `;
 export const TableColumn3 = styled.div`

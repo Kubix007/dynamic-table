@@ -34,6 +34,29 @@ export const getAllBooks = createAsyncThunk(
   }
 );
 
+//Get all books
+export const getAllBooksByGenre = createAsyncThunk(
+  "/book/getAllBooksByGenre",
+  async (genre: string, thunkAPI) => {
+    try {
+      return await bookService.getAllBooksByGenre(genre);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      } else {
+        console.log("unexpected error: ", error);
+        return "An unexpected error occurred";
+      }
+    }
+  }
+);
+
 export const bookSlice = createSlice({
   name: "book",
   initialState,
@@ -52,6 +75,21 @@ export const bookSlice = createSlice({
         state.books = action.payload;
       })
       .addCase(getAllBooks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload as string;
+      })
+      .addCase(getAllBooksByGenre.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllBooksByGenre.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.books = action.payload;
+      })
+      .addCase(getAllBooksByGenre.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
