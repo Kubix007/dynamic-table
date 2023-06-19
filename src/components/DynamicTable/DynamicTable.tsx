@@ -2,7 +2,7 @@ import BookIcon from "../BookIcon";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Pagination from "../Pagination";
-import { setGenre } from "../../features/filters/filterSlice";
+import { setGenre, setKind } from "../../features/filters/filterSlice";
 import { AppDispatch } from "../../app/store";
 import { useDispatch } from "react-redux";
 import { remove } from "diacritics";
@@ -22,10 +22,10 @@ const DynamicTable = ({ data }: Types.IProps) => {
   const handleClick = (book: SharedTypes.IBook) => {
     navigate(
       `/ksiazki/${remove(
-        book.genre.split(", ")[0].replaceAll(" ", "-").toLowerCase()
-      )}/${remove(book.kind.replaceAll(" ", "-").toLowerCase())}/${remove(
-        book.author.replaceAll(" ", "-").toLowerCase()
+        book.kind.replaceAll(" ", "-").toLowerCase()
       )}/${remove(
+        book.genre.split(", ")[0].replaceAll(" ", "-").toLowerCase()
+      )}/${remove(book.author.replaceAll(" ", "-").toLowerCase())}/${remove(
         book.title
           .replaceAll(" ", "-")
           .toLocaleLowerCase()
@@ -35,7 +35,10 @@ const DynamicTable = ({ data }: Types.IProps) => {
           .replaceAll(".", "")
       )}`
     );
-    dispatch(setGenre(book.genre.split(", ")[0].replaceAll(" ", "-")));
+    dispatch(
+      setGenre(book.genre.split(", ")[0].replaceAll(" ", "-").toLowerCase())
+    );
+    dispatch(setKind(book.kind.replaceAll(" ", "-").toLowerCase()));
   };
 
   const TableBody = () => {
@@ -51,11 +54,11 @@ const DynamicTable = ({ data }: Types.IProps) => {
           <Styles.TableColumn3 className="col-3" data-label="Autor">
             {book.author}
           </Styles.TableColumn3>
-          <Styles.TableColumn4 className="col-4" data-label="Gatunek">
-            {book.genre.split(", ")[0]}
-          </Styles.TableColumn4>
-          <Styles.TableColumn5 className="col-5" data-label="Rodzaj">
+          <Styles.TableColumn4 className="col-4" data-label="Rodzaj">
             {book.kind}
+          </Styles.TableColumn4>
+          <Styles.TableColumn5 className="col-5" data-label="Gatunek">
+            {book.genre.split(", ")[0]}
           </Styles.TableColumn5>
         </Styles.TableRow>
       );
@@ -69,8 +72,8 @@ const DynamicTable = ({ data }: Types.IProps) => {
           <Styles.TableColumn1 className="col-1"></Styles.TableColumn1>
           <Styles.TableColumn2 className="col-2">Tytuł</Styles.TableColumn2>
           <Styles.TableColumn3 className="col-3">Autor</Styles.TableColumn3>
-          <Styles.TableColumn4 className="col-4">Gatunek</Styles.TableColumn4>
-          <Styles.TableColumn5 className="col-5">Rodzaj</Styles.TableColumn5>
+          <Styles.TableColumn4 className="col-4">Rodzaj</Styles.TableColumn4>
+          <Styles.TableColumn5 className="col-5">Gatunek</Styles.TableColumn5>
         </Styles.TableHeader>
         {TableBody()}
       </Styles.ResponsiveTable>

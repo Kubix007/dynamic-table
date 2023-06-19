@@ -18,8 +18,11 @@ export const filterSlice = createSlice({
     setGenre: (state, action) => {
       state.filters.genre = action.payload;
     },
+    setKind: (state, action) => {
+      state.filters.kind = action.payload;
+    },
   },
 });
 
-export const { reset, setGenre } = filterSlice.actions;
+export const { reset, setGenre, setKind } = filterSlice.actions;
 export default filterSlice.reducer;

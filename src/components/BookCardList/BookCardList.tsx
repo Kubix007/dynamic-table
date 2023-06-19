@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import BookCard from "../BookCard/BookCard";
-import { useParams } from "react-router-dom";
-import * as Styles from "./BookCardList.styles";
 import Pagination from "../Pagination";
 import { useState } from "react";
+import * as Styles from "./BookCardList.styles";
 
 const BookCardList = () => {
-  const { authorsBook } = useSelector((state: RootState) => state.selectedBook);
-  const { title } = useParams();
+  const { authorsBook, bookDetails } = useSelector(
+    (state: RootState) => state.selectedBook
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage] = useState(4);
@@ -20,7 +20,7 @@ const BookCardList = () => {
     <Styles.Container>
       <Styles.GridContainer container direction="row">
         {currentBooks
-          .filter((item) => item.title !== title)
+          .filter((item) => item.title !== bookDetails?.title)
           .map((item) => (
             <BookCard
               key={item.title}

@@ -21,31 +21,22 @@ const Breadcrumbs = () => {
         <Link underline="hover" color="inherit" href="/">
           Książki
         </Link>
-        {filters.genre ? (
+        {filters.kind ? (
           <Link
             underline="hover"
             color="inherit"
-            href={`/ksiazki/${filters.genre.toLowerCase()}`}
+            href={`/ksiazki/${filters.kind}`}
+          >
+            {filters.kind[0].toUpperCase() + filters.kind.slice(1)}
+          </Link>
+        ) : null}
+        {filters.genre && filters.kind ? (
+          <Link
+            underline="hover"
+            color="inherit"
+            href={`/ksiazki/${filters.kind}/${filters.genre}`}
           >
             {filters.genre[0].toUpperCase() + filters.genre.slice(1)}
-          </Link>
-        ) : null}
-        {bookDetails?.kinds[0].name ? (
-          <Link
-            underline="hover"
-            color="inherit"
-            href="/material-ui/getting-started/installation/"
-          >
-            {bookDetails?.kinds[0].name}
-          </Link>
-        ) : null}
-        {bookDetails?.authors[0].name ? (
-          <Link
-            underline="hover"
-            color="inherit"
-            href="/material-ui/getting-started/installation/"
-          >
-            {bookDetails?.authors[0].name}
           </Link>
         ) : null}
         <Typography color="text.primary">{bookDetails?.title}</Typography>

@@ -8,10 +8,10 @@ import { CircularProgress } from "@mui/material";
 import { Navigate } from "react-router-dom";
 
 const Books = () => {
+  const dispatch: AppDispatch = useDispatch();
   const { books, isLoading, isError } = useSelector(
     (state: RootState) => state.book
   );
-  const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllBooks());

@@ -659,3 +659,91 @@ export const bookGenresData = [
     slug: "wnetrze",
   },
 ];
+
+export const bookKindsData = [
+  {
+    href: "https://wolnelektury.pl/api/kinds/bodzettov/",
+    name: "Bodzettov",
+    slug: "bodzettov",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/ceramika/",
+    name: "Ceramika",
+    slug: "ceramika",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/dramat/",
+    name: "Dramat",
+    slug: "dramat",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/epika/",
+    name: "Epika",
+    slug: "epika",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/fotografia/",
+    name: "Fotografia",
+    slug: "fotografia",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/grafika/",
+    name: "Grafika",
+    slug: "grafika",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/ikona/",
+    name: "Ikona",
+    slug: "ikona",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/liryka/",
+    name: "Liryka",
+    slug: "liryka",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/litografia/",
+    name: "Litografia",
+    slug: "litografia",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/malarstwo/",
+    name: "Malarstwo",
+    slug: "malarstwo",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/malowidlo-scienne/",
+    name: "Malowidło ścienne",
+    slug: "malowidlo-scienne",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/oltarz/",
+    name: "Ołtarz",
+    slug: "oltarz",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/retabulum-oltarzowe/",
+    name: "Retabulum ołtarzowe",
+    slug: "retabulum-oltarzowe",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/rysunek/",
+    name: "Rysunek",
+    slug: "rysunek",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/rzemioslo/",
+    name: "Rzemiosło",
+    slug: "rzemioslo",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/rzezba/",
+    name: "Rzeźba",
+    slug: "rzezba",
+  },
+  {
+    href: "https://wolnelektury.pl/api/kinds/sarkofag/",
+    name: "Sarkofag",
+    slug: "sarkofag",
+  },
+];
