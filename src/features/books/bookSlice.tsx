@@ -35,11 +35,11 @@ export const getAllBooks = createAsyncThunk(
 );
 
 //Get all books
-export const getAllBooksByGenre = createAsyncThunk(
-  "/book/getAllBooksByGenre",
-  async (genre: string, thunkAPI) => {
+export const getAllBooksByKind = createAsyncThunk(
+  "/book/getAllBooksByKind",
+  async (kind: string, thunkAPI) => {
     try {
-      return await bookService.getAllBooksByGenre(genre);
+      return await bookService.getAllBooksByKind(kind);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message =
@@ -103,16 +103,16 @@ export const bookSlice = createSlice({
         state.isError = true;
         state.message = action.payload as string;
       })
-      .addCase(getAllBooksByGenre.pending, (state) => {
+      .addCase(getAllBooksByKind.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllBooksByGenre.fulfilled, (state, action) => {
+      .addCase(getAllBooksByKind.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.books = action.payload;
       })
-      .addCase(getAllBooksByGenre.rejected, (state, action) => {
+      .addCase(getAllBooksByKind.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;

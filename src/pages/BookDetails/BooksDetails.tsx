@@ -47,7 +47,11 @@ const BooksDetails = () => {
   }, [author, dispatch, formatedAuthor, formatedTitle]);
 
   if (isLoadingBooks || isLoading) {
-    return <CircularProgress />;
+    return (
+      <Styles.LoadingContainer>
+        <CircularProgress style={{ width: "100px", height: "100px" }} />
+      </Styles.LoadingContainer>
+    );
   } else if (isError || isErrorLoadingBooks) {
     return <Navigate to="/blad" />;
   } else {
@@ -71,10 +75,12 @@ const BooksDetails = () => {
           <Styles.Details container direction="column">
             <Styles.BookInfoTop item>
               {bookDetails ? (
-                <Styles.BookTitle>{bookDetails.title}</Styles.BookTitle>
+                <Styles.BookTitle text={bookDetails.title}>
+                  {bookDetails.title}
+                </Styles.BookTitle>
               ) : null}
               {bookDetails ? (
-                <Styles.BookAuthor>
+                <Styles.BookAuthor text={bookDetails.authors[0].name}>
                   {bookDetails.authors[0].name}
                 </Styles.BookAuthor>
               ) : null}

@@ -1,10 +1,19 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { ReactComponent as NoImage } from "./../../img/noImage.svg";
 import styled from "styled-components";
+import * as Types from "./BooksDetails.types";
 
 export const NoImageError = styled(NoImage)`
   height: 500px;
   width: 360px;
+`;
+
+export const LoadingContainer = styled(Box)`
+  display: flex;
+  width: 455px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const BooksDetailsContainer = styled(Grid)`
@@ -117,34 +126,36 @@ export const OtherBooks = styled(Grid)`
   }
 `;
 
-export const BookTitle = styled(Typography)`
+export const BookTitle = styled(Typography)<Types.IProps>`
   &.MuiTypography-root {
     font-family: FiraSans-Bold;
     font-size: 1.9em;
     text-align: left;
     @media screen and (max-width: 1070px) {
       width: 420px;
+      font-size: ${(props) => (props.text.length > 34 ? "1.3em" : "1.5em")};
     }
     @media screen and (max-width: 590px) {
       width: 240px;
       margin: 0px !important;
-      font-size: 1.5em;
+      font-size: ${(props) => (props.text.length > 34 ? "0.7em" : "0.8em")};
     }
   }
 `;
 
-export const BookAuthor = styled(Typography)`
+export const BookAuthor = styled(Typography)<Types.IProps>`
   &.MuiTypography-root {
     font-family: FiraSans-Light;
     font-size: 1.5em;
     text-align: left;
     @media screen and (max-width: 1070px) {
       width: 420px;
+      font-size: ${(props) => (props.text.length > 34 ? "1.3em" : "1.5em")};
     }
     @media screen and (max-width: 590px) {
       width: 240px;
       margin: 0px !important;
-      font-size: 1.1em;
+      font-size: ${(props) => (props.text.length > 34 ? "0.7em" : "0.8em")};
     }
   }
 `;

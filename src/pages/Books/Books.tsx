@@ -18,7 +18,11 @@ const Books = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Styles.LoadingContainer>
+        <CircularProgress style={{ width: "100px", height: "100px" }} />
+      </Styles.LoadingContainer>
+    );
   } else if (isError) {
     return <Navigate to="/blad" />;
   } else {

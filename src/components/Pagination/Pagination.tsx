@@ -22,6 +22,7 @@ const Pagination = ({
         total={pageCount}
         showLessItems
         style={{ marginBottom: "2rem" }}
+        data-testid="pagination-testid"
       />
     </Styles.Container>
   );

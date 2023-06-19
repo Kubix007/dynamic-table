@@ -7,6 +7,7 @@ import {
 import { NavigateNext } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { remove } from "diacritics";
 
 const Breadcrumbs = () => {
   const { bookDetails } = useSelector((state: RootState) => state.selectedBook);
@@ -17,6 +18,7 @@ const Breadcrumbs = () => {
       <BreadcrumbMui
         separator={<NavigateNext fontSize="small" />}
         aria-label="breadcrumb"
+        data-testid="breadcrumb-testid"
       >
         <Link underline="hover" color="inherit" href="/">
           Książki
@@ -25,7 +27,7 @@ const Breadcrumbs = () => {
           <Link
             underline="hover"
             color="inherit"
-            href={`/ksiazki/${filters.kind}`}
+            href={`/ksiazki/${remove(filters.kind)}`}
           >
             {filters.kind[0].toUpperCase() + filters.kind.slice(1)}
           </Link>
@@ -34,7 +36,7 @@ const Breadcrumbs = () => {
           <Link
             underline="hover"
             color="inherit"
-            href={`/ksiazki/${filters.kind}/${filters.genre}`}
+            href={`/ksiazki/${remove(filters.kind)}/${remove(filters.genre)}`}
           >
             {filters.genre[0].toUpperCase() + filters.genre.slice(1)}
           </Link>

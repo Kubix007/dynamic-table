@@ -44,20 +44,43 @@ const DynamicTable = ({ data }: Types.IProps) => {
   const TableBody = () => {
     return currentBooks.map((book) => {
       return (
-        <Styles.TableRow key={book.url} onClick={() => handleClick(book)}>
-          <Styles.TableColumn1 className="col-1">
+        <Styles.TableRow
+          data-testid="dynamic-table-col"
+          key={book.url}
+          onClick={() => handleClick(book)}
+        >
+          <Styles.TableColumn1
+            data-testid="dynamic-table-col-img"
+            className="col-1"
+          >
             <BookIcon src={book.simple_thumb} alt={book.title} />
           </Styles.TableColumn1>
-          <Styles.TableColumn2 className="col-2" data-label="Tytuł">
+          <Styles.TableColumn2
+            data-testid="dynamic-table-col-title"
+            className="col-2"
+            data-label="Tytuł"
+          >
             {book.title}
           </Styles.TableColumn2>
-          <Styles.TableColumn3 className="col-3" data-label="Autor">
+          <Styles.TableColumn3
+            data-testid="dynamic-table-col-author"
+            className="col-3"
+            data-label="Autor"
+          >
             {book.author}
           </Styles.TableColumn3>
-          <Styles.TableColumn4 className="col-4" data-label="Rodzaj">
+          <Styles.TableColumn4
+            data-testid="dynamic-table-col-kind"
+            className="col-4"
+            data-label="Rodzaj"
+          >
             {book.kind}
           </Styles.TableColumn4>
-          <Styles.TableColumn5 className="col-5" data-label="Gatunek">
+          <Styles.TableColumn5
+            data-testid="dynamic-table-col-genre"
+            className="col-5"
+            data-label="Gatunek"
+          >
             {book.genre.split(", ")[0]}
           </Styles.TableColumn5>
         </Styles.TableRow>
@@ -67,7 +90,7 @@ const DynamicTable = ({ data }: Types.IProps) => {
 
   return (
     <div>
-      <Styles.ResponsiveTable>
+      <Styles.ResponsiveTable data-testid="dynamic-table">
         <Styles.TableHeader className="table-header">
           <Styles.TableColumn1 className="col-1"></Styles.TableColumn1>
           <Styles.TableColumn2 className="col-2">Tytuł</Styles.TableColumn2>

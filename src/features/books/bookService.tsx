@@ -6,9 +6,9 @@ const getAllBooks = async () => {
   return response.data;
 };
 
-const getAllBooksByGenre = async (genre: string) => {
+const getAllBooksByKind = async (kinds: string) => {
   const response = await axios.get(
-    `https://wolnelektury.pl/api/genres/${genre}/books/`
+    `https://wolnelektury.pl/api/kinds/${kinds}/books/`
   );
 
   return response.data;
@@ -16,7 +16,7 @@ const getAllBooksByGenre = async (genre: string) => {
 
 const getAllBooksByGenreAndKind = async (genre: string, kind: string) => {
   const response = await axios.get(
-    `https://wolnelektury.pl/api/genres/${genre}/kinds/${kind}/books/`
+    `https://wolnelektury.pl/api/kinds/${kind}/genres/${genre}/books/`
   );
 
   return response.data;
@@ -24,7 +24,7 @@ const getAllBooksByGenreAndKind = async (genre: string, kind: string) => {
 
 const bookService = {
   getAllBooks,
-  getAllBooksByGenre,
+  getAllBooksByKind,
   getAllBooksByGenreAndKind,
 };
 

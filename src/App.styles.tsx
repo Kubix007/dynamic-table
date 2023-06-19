@@ -5,12 +5,12 @@ import backgroundImage from "./img/backgroundImage.jpg";
 export const Container = styled(Box)`
   width: 100%;
   background: url(${backgroundImage});
-  display: flex;
-  flex-direction: column;
+  display: grid;
   align-items: center;
   justify-content: center;
   background-attachment: fixed;
   height: 100vh;
+  grid-template-rows: 0.5fr 0.5fr;
 `;
 
 export const ContentPaper = styled(Paper)`
