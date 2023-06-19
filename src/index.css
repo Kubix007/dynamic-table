@@ -54,6 +54,10 @@ body {
   vertical-align: middle;
 }
 .rc-pagination-item {
+  @media screen and (max-width: 590px) {
+    height: 20px;
+    min-width: 15px;
+  }
   display: inline-block;
   min-width: 28px;
   height: 28px;
@@ -146,6 +150,10 @@ body {
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.3s;
+  @media screen and (max-width: 590px) {
+    height: 25px;
+    min-width: 20px;
+  }
 }
 
 .rc-pagination-prev,

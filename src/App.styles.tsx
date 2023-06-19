@@ -16,17 +16,29 @@ export const Container = styled(Box)`
 export const ContentPaper = styled(Paper)`
   &.MuiPaper-root {
     padding: 20px;
-    max-width: 1100px;
+    max-width: 1000px;
     height: fit-content;
     margin-top: 10px;
+    @media screen and (max-width: 1070px) {
+      width: 455px;
+    }
+    @media screen and (max-width: 590px) {
+      width: 260px;
+    }
   }
 `;
 
 export const HeaderPaper = styled(Paper)`
   &.MuiPaper-root {
     padding: 20px;
-    width: 1020px;
+    width: 1000px;
     height: fit-content;
     display: flex;
+    @media screen and (max-width: 1070px) {
+      width: 455px;
+    }
+    @media screen and (max-width: 590px) {
+      width: 260px;
+    }
   }
 `;

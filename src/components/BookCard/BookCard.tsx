@@ -3,9 +3,9 @@ import { remove } from "diacritics";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
+import { setGenre, setKind } from "../../features/filters/filterSlice";
 import * as Types from "./BookCard.types";
 import * as Styles from "./BookCard.styles";
-import { setGenre, setKind } from "../../features/filters/filterSlice";
 
 const BookCard = ({ author, title, image, kind, genre }: Types.IProps) => {
   const dispatch: AppDispatch = useDispatch();

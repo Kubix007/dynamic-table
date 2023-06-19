@@ -55,7 +55,10 @@ const BooksDetails = () => {
       <Styles.BooksDetailsContainer container direction="row">
         <Styles.BookImage item>
           {bookDetails ? (
-            <img src={bookDetails.simple_thumb} alt={bookDetails.title} />
+            <Styles.Image
+              src={bookDetails.simple_thumb}
+              alt={bookDetails.title}
+            />
           ) : (
             <Styles.NoImageError />
           )}
@@ -65,7 +68,7 @@ const BooksDetails = () => {
           </Styles.BookInfoBottom>
         </Styles.BookImage>
         <Styles.BookDetails item>
-          <Styles.BookDetails container direction="column">
+          <Styles.Details container direction="column">
             <Styles.BookInfoTop item>
               {bookDetails ? (
                 <Styles.BookTitle>{bookDetails.title}</Styles.BookTitle>
@@ -93,7 +96,7 @@ const BooksDetails = () => {
               </Styles.OtherBooksInfo>
               {isLoading ? <CircularProgress /> : <BookCardList />}
             </Styles.OtherBooks>
-          </Styles.BookDetails>
+          </Styles.Details>
         </Styles.BookDetails>
       </Styles.BooksDetailsContainer>
     );
