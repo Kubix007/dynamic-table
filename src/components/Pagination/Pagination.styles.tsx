@@ -7,8 +7,10 @@ export const Container = styled(Box)`
   @media screen and (max-width: 1070px) {
     width: 420px;
     margin-top: 15px;
+    margin: auto;
   }
   @media screen and (max-width: 590px) {
     width: 220px;
+    margin: auto;
   }
 `;

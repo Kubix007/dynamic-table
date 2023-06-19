@@ -17,7 +17,7 @@ function App() {
   return (
     <Styles.Container>
       <Router>
-        <Styles.HeaderPaper>
+        <Styles.HeaderPaper className="paper-header">
           <header className="App-header">
             <Breadcrumbs />
           </header>

@@ -33,10 +33,13 @@ export const ResponsiveTable = styled.ul`
 
   & > li {
     border-radius: 3px;
-    padding: 25px 30px;
+    padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
+    @media screen and (max-width: 1070px) and (min-width: 590px) {
+      padding: 10px 10px;
+    }
   }
 
   @media all and (max-width: 767px) {
@@ -53,6 +56,14 @@ export const ResponsiveTable = styled.ul`
       display: flex;
       padding: 10px 0;
     }
+    & .col-1 {
+      display: flex;
+      justify-content: center;
+    }
+    & .col-2 {
+      justify-content: center;
+    }
+
     & > .col:before {
       color: #6c7a89;
       padding-right: 10px;
@@ -72,12 +83,21 @@ export const TableHeader = styled.li`
 
 export const TableRow = styled.li`
   background-color: #fff;
-  width: 960px;
+  width: 940px;
   padding: 5px;
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
   font-family: FiraSans-Light;
   &:hover {
     background-color: #eee;
+  }
+  @media screen and (max-width: 1070px) {
+    width: 435px;
+  }
+  @media screen and (max-width: 590px) {
+    width: 200px;
+  }
+  @media all and (max-width: 767px) {
+    height: 170px;
   }
 `;
 
@@ -85,26 +105,44 @@ export const TableColumn1 = styled.div`
   flex-basis: 10%;
 `;
 export const TableColumn2 = styled.div`
-  flex-basis: 15%;
+  flex-basis: 25%;
   display: flex;
+  text-align: center;
   justify-content: left;
   align-items: center;
+  @media screen and (max-width: 1070px) and (min-width: 590px) {
+    text-align: center;
+    font-size: 12px;
+    justify-content: center;
+  }
 `;
 export const TableColumn3 = styled.div`
   flex-basis: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1070px) and (min-width: 590px) {
+    text-align: center;
+    font-size: 12px;
+  }
 `;
 export const TableColumn4 = styled.div`
-  flex-basis: 25%;
+  flex-basis: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1070px) and (min-width: 590px) {
+    text-align: center;
+    font-size: 12px;
+  }
 `;
 export const TableColumn5 = styled.div`
-  flex-basis: 20%;
+  flex-basis: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1070px) and (min-width: 590px) {
+    text-align: center;
+    font-size: 12px;
+  }
 `;
