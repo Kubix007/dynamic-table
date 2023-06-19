@@ -27,6 +27,8 @@ const BookCardList = () => {
               author={item.author}
               title={item.title}
               image={item.simple_thumb}
+              kind={item.kind}
+              genre={item.genre}
             />
           ))}
       </Styles.GridContainer>
